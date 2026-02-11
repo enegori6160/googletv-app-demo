@@ -9,6 +9,7 @@ import androidx.activity.viewModels
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
+import androidx.compose.foundation.focusable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -34,6 +35,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.input.key.Key
 import androidx.compose.ui.input.key.KeyEventType
+import androidx.compose.ui.input.key.key
 import androidx.compose.ui.input.key.onKeyEvent
 import androidx.compose.ui.input.key.type
 import androidx.compose.ui.platform.LocalContext
@@ -94,7 +96,9 @@ private fun TetrisScreen(state: TetrisState, onAction: (GameAction) -> Unit) {
             .fillMaxSize()
             .background(Color(0xFF0F172A))
             .padding(horizontal = 72.dp, vertical = 48.dp)
+            // 修正箇所: focusable() を追加し、focusRequester を適用
             .focusRequester(focusRequester)
+            .focusable()
             .onKeyEvent { keyEvent ->
                 when {
                     keyEvent.key == Key.DirectionDown && keyEvent.type == KeyEventType.KeyDown -> {
